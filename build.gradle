@@ -22,3 +22,8 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+jar {
+    archiveBaseName.set("AutoTotem")
+    archiveVersion.set("")
+}
