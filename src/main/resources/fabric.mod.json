@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "autototem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "AutoTotem",
   "description": "Automatically equips a totem in offhand when needed.",
   "authors": [
