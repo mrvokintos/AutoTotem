@@ -23,7 +23,8 @@ java {
     }
 }
 
-jar {
+tasks.named("remapJar") {
     archiveBaseName.set("AutoTotem")
     archiveVersion.set("")
+    archiveClassifier.set("")
 }
