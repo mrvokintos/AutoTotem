@@ -8,6 +8,10 @@ on:
         required: true
         default: "false"
         type: boolean
+      mod_version:
+        description: "Версия мода (например, 1.2.3)"
+        required: false
+        default: ""
 
   push:
     branches: [ main ]
@@ -18,6 +22,9 @@ jobs:
   build:
     name: Build with Gradle
     runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
 
     steps:
       - name: Checkout repository
@@ -31,6 +38,17 @@ jobs:
 
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
+
+      - name: Set version variable
+        id: set_version
+        run: |
+          if [ -z "${{ github.event.inputs.mod_version }}" ]; then
+            VERSION="1.0.${{ github.run_number }}"
+          else
+            VERSION="${{ github.event.inputs.mod_version }}"
+          fi
+          echo "Using version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build the mod
         run: ./gradlew build
@@ -60,7 +78,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          name: AutoTotem v1.0.${{ github.run_number }}
+          tag_name: v${{ needs.build.outputs.version }}
+          name: AutoTotem v${{ needs.build.outputs.version }}
           body: "Автоматически собранный релиз"
           files: dist/*.jar
