@@ -13,7 +13,7 @@ AutoTotem — минималистичный клиентский мод для 
 
 1. Установите [Fabric Loader](https://fabricmc.net/use/)
 2. Установите [Fabric API](https://modrinth.com/mod/fabric-api)
-3. Скачайте AutoTotemMod.jar из [релизов](https://github.com/mrvokintos/AutoTotem/releases)
+3. Скачайте AutoTotem.jar из [релизов](https://github.com/mrvokintos/AutoTotem/releases)
 4. Поместите файл в папку mods
 5. Запустите Minecraft с Fabric
 
