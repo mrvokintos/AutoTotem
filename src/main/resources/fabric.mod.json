@@ -7,7 +7,7 @@
   "authors": [
     "mr_vokintos"
   ],
-  "license": "MIT",
+  "license": "GPL-3.0",
   "environment": "*",
   "entrypoints": {
     "client": [
