@@ -4,14 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       release:
-        description: "Создать GitHub релиз после сборки?"
+        description: "Create a GitHub release after building?"
         required: true
         default: "false"
         type: boolean
-      mod_version:
-        description: "Версия мода (например, 1.2.3)"
-        required: false
-        default: ""
 
   push:
     branches: [ main ]
@@ -24,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      version: ${{ steps.set_version.outputs.version }}
+      version: ${{ steps.read_version.outputs.mod_version }}
 
     steps:
       - name: Checkout repository
@@ -39,16 +35,12 @@ jobs:
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x ./gradlew
 
-      - name: Set version variable
-        id: set_version
+      - name: Read version from fabric.mod.json
+        id: read_version
         run: |
-          if [ -z "${{ github.event.inputs.mod_version }}" ]; then
-            VERSION="1.0.${{ github.run_number }}"
-          else
-            VERSION="${{ github.event.inputs.mod_version }}"
-          fi
-          echo "Using version: $VERSION"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          VERSION=$(jq -r '.version' src/main/resources/fabric.mod.json)
+          echo "Version from fabric.mod.json: $VERSION"
+          echo "mod_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build the mod
         run: ./gradlew build
@@ -80,5 +72,5 @@ jobs:
         with:
           tag_name: v${{ needs.build.outputs.version }}
           name: AutoTotem v${{ needs.build.outputs.version }}
-          body: "Автоматически собранный релиз"
+          body: "Automatically built release"
           files: dist/*.jar
