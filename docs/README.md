@@ -13,7 +13,7 @@ AutoTotem is a minimalist client-side mod for Fabric that automatically places a
 
 1. Install [Fabric Loader](https://fabricmc.net/use/)
 2. Install [Fabric API](https://modrinth.com/mod/fabric-api)
-3. Download `AutoTotemMod.jar` from the [releases](https://github.com/mrvokintos/AutoTotem/releases)
+3. Download `AutoTotem.jar` from the [releases](https://github.com/mrvokintos/AutoTotem/releases)
 4. Put the file into the `mods` folder
 5. Launch Minecraft with Fabric
 
