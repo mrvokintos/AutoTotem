@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "autototem",
+  "version": "1.0.0",
+  "name": "AutoTotem",
+  "description": "Automatically equips a totem in offhand when needed.",
+  "authors": [
+    "mr_vokintos"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "mr_vokintos.autototem.AutoTotem"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.6",
+    "fabric": "*",
+    "minecraft": "1.21.1"
+  },
+  "contact": {
+    "homepage": "https://github.com/mrvokintos/AutoTotem",
+    "issues": "https://github.com/mrvokintos/AutoTotem/issues"
+  },
+  "icon": "assets/autototem/huesos.png"
+}
