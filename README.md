@@ -1,4 +1,4 @@
-**English** | [Русский](README_RU.md)
+**English** | [Русский](res/README_RU.md)
 # AutoTotem
 
 AutoTotem is a minimalist client-side mod for Fabric that automatically places a Totem of Undying in the player's offhand in critical situations.
