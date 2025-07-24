@@ -3,9 +3,9 @@ package mr_vokintos.autototem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Items;
-import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.item.ItemStack;
 
 public class AutoTotem implements ClientModInitializer {
 
@@ -18,6 +18,7 @@ public class AutoTotem implements ClientModInitializer {
             if (mc.player == null || mc.world == null) return;
 
             float currentHealth = mc.player.getHealth() + mc.player.getAbsorptionAmount();
+
             if (currentHealth <= healthThreshold) {
                 equipTotemIfNeeded();
             }
@@ -26,6 +27,7 @@ public class AutoTotem implements ClientModInitializer {
 
     private void equipTotemIfNeeded() {
         ItemStack offhand = mc.player.getOffHandStack();
+
         if (offhand.getItem() == Items.TOTEM_OF_UNDYING) return;
 
         for (int i = 0; i < mc.player.getInventory().size(); i++) {
@@ -37,23 +39,12 @@ public class AutoTotem implements ClientModInitializer {
         }
     }
 
-    private void swapToOffhand(int invSlot) {
-        // Convert inventory slot to GUI slot ID
-        int guiSlotId = 0;
-
-        if (invSlot >= 0 && invSlot < 9) {
-            guiSlotId = 36 + invSlot; // Hotbar slots
-        } else if (invSlot >= 9 && invSlot < 36) {
-            guiSlotId = invSlot - 9; // Inventory slots
-        } else {
-            return; // Invalid slot
-        }
-
+    private void swapToOffhand(int slot) {
         mc.interactionManager.clickSlot(
                 mc.player.currentScreenHandler.syncId,
-                guiSlotId,
+                slot,
                 40,
-                SlotActionType.SWAP,
+                net.minecraft.screen.slot.SlotActionType.SWAP,
                 mc.player
         );
     }
